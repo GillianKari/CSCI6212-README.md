@@ -43,7 +43,7 @@ def find_max_in_rotated_array(A):
         else:
             high = mid - 1
 
-# --- Runtime Simulation ---
+# Runtime Simulation 
 def simulate_runtime(n):
     """Generate a rotated sorted array of size n and measure search time."""
     arr = sorted(random.sample(range(1, n*5), n))
