@@ -1,13 +1,13 @@
-# CSCI6212-README.md
-CSCI6212 Project2
+"# CSCI6212-README.md"
+# CSCI6212 Project2
 
-CSCI6212-Project2
-Finding Maximum in a Circularly Shifted Array
-Overview
+## Finding Maximum in a Circularly Shifted Array
+## Overview
+
 This project implements and analyzes an O(log n) algorithm to find the maximum element in a sorted array that has been circularly (rotated) shifted.
 The algorithm is a variation of binary search, which efficiently locates the pivot point — the position where the order “wraps around.” The element just before this pivot is the maximum value in the array.
 
-Algorithm Description
+## Algorithm Description
 Given a sorted array that has been rotated to the right by an unknown number of positions, such as:
 [35, 42, 5, 15, 27, 29]
 
@@ -22,6 +22,8 @@ Else if the left half is sorted (A[low] <= A[mid]), search in the right half (lo
 Otherwise, search in the left half (high = mid - 1).
 The loop continues until the pivot (maximum) is found.
 
+## Code 
+```python
 import random, time
 
 def find_max_in_rotated_array(A):
