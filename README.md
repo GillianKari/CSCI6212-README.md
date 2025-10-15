@@ -24,42 +24,55 @@ The loop continues until the pivot (maximum) is found.
 
 ## Code 
 ```python
-import random, time
+def find_largest_element(arr):
+    """
+    Finds the largest element in a circularly shifted sorted array.
 
-def find_max_in_rotated_array(A):
-    """Return the maximum element in a rotated sorted array using O(log n) search."""
-    low, high = 0, len(A) - 1
+    Args:
+        arr: A list of integers.
 
-    # If array is not rotated
-    if A[low] < A[high]:
-        return A[high]
+    Returns:
+        The largest integer in the array.
+    """
+    n = len(arr)
+    # Handle the case of a single-element array
+    if n == 1:
+        return arr[0]
+
+    low = 0
+    high = n - 1
 
     while low <= high:
-        mid = (low + high) // 2
+        mid = low + (high - low) // 2
 
-        # Pivot condition
-        if mid < len(A) - 1 and A[mid] > A[mid + 1]:
-            return A[mid]
-        elif A[mid] >= A[low]:
+        # If the middle element is greater than its next element, it is the largest.
+        # Use modulo for the next element to handle wrap-around.
+        if arr[mid] > arr[(mid + 1) % n]:
+            return arr[mid]
+
+        # If the array is not rotated, the largest is the last element
+        if arr[low] < arr[high]:
+            return arr[high]
+
+        # If the left half is sorted, the largest element must be in the right half.
+        if arr[low] <= arr[mid]:
             low = mid + 1
+        # Otherwise, the largest element is in the left half.
         else:
-            high = mid - 1
+            high = mid
+    
+    return -1 # Should not be reached in a valid array
 
-# Runtime Simulation 
-def simulate_runtime(n):
-    """Generate a rotated sorted array of size n and measure search time."""
-    arr = sorted(random.sample(range(1, n*5), n))
-    # Random rotation
-    k = random.randint(0, n - 1)
-    rotated = arr[k:] + arr[:k]
+# Example usage
+arr1 = [35, 42, 5, 15, 27, 29]
+print(f"The largest element in {arr1} is: {find_largest_element(arr1)}")
 
-    start = time.time()
-    _ = find_max_in_rotated_array(rotated)
-    end = time.time()
-    return end - start
+arr2 = [27, 29, 35, 42, 5, 15]
+print(f"The largest element in {arr2} is: {find_largest_element(arr2)}")
 
-# Test for multiple input sizes
-n_values = [10**3, 5*10**3, 10**4, 5*10**4, 10**5, 5*10**5]
-for n in n_values:
-    t = simulate_runtime(n)
-    print(f"n={n:6d}, time={t:.8f}s, normalized={t / (math.log2(n)):.6e}")
+arr3 = [5, 15, 27, 29, 35, 42]
+print(f"The largest element in {arr3} is: {find_largest_element(arr3)}")
+
+arr4 = [42, 5, 15, 27, 29, 35]
+print(f"The largest element in {arr4} is: {find_largest_element(arr4)}")
+
