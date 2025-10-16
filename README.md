@@ -4,8 +4,8 @@
 ## Finding Maximum in a Circularly Shifted Array
 ## Overview
 
-This project implements and analyzes an O(log n) algorithm to find the maximum element in a sorted array that has been circularly (rotated) shifted.
-The algorithm is a variation of binary search, which efficiently locates the pivot point — the position where the order “wraps around.” The element just before this pivot is the maximum value in the array.
+This solution demonstrate an O(log n) solution for finding the maximum element from a sorted array which is first decreasing and then increasing. The algorithm is a form of binary search that effectively finds the pivot point — the place where the ordering ‘wraps around. Because the array was originally sorted but rotated, we can find the largest element by checking the midpoint and deciding which half of the array still contains the rotation.
+We keep halving the search space → giving us O (log n) time, each step (iteration) eliminates half of the possible region.
 
 ## Algorithm Description
 Given a sorted array that has been rotated to the right by an unknown number of positions, such as:
